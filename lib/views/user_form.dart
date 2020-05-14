@@ -9,16 +9,19 @@ class UserForm extends StatelessWidget {
   final Map<String, String> _formData = {};
 
   void _loadFormData (User user){
-    _formData['id'] = user.id;
-    _formData['name'] = user.name;
-    _formData['email'] = user.email;
-    _formData['avatarUrl'] = user.avatarUrl;
+    if(user != null){
+      _formData['id'] = user.id;
+      _formData['name'] = user.name;
+      _formData['email'] = user.email;
+      _formData['avatarUrl'] = user.avatarUrl;
+    }//if
+
   }//_loadFormData
 
   @override
   Widget build(BuildContext context) {
     final User user = ModalRoute.of(context).settings.arguments;
-    
+
     _loadFormData(user);
 
     return Scaffold(
