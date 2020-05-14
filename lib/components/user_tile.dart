@@ -43,21 +43,21 @@ class UserTile extends StatelessWidget {
                             actions: <Widget>[
                               FlatButton(
                                 child: Text('Não'),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                }, //onPressed
+                                onPressed: () => Navigator.of(context).pop(false),
                               ),
                               FlatButton(
                                 child: Text('Sim'),
-                                onPressed: () {
-                                  Provider.of<Users>(context, listen: false)
-                                      .remove(user);
-                                  Navigator.of(context).pop();
-                                },
+                                onPressed: () => Navigator.of(context).pop(true),
+                                
                               ),
                             ],
                           )
-                        );
+                        ).then((confirmed) {
+                          if(confirmed){
+                              Provider.of<Users>(context, listen: false)
+                                      .remove(user);
+                          }//if
+                        });
                 }, //onPressed
               ),
             ],
