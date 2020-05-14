@@ -34,8 +34,9 @@ class Users with ChangeNotifier {
       avatarUrl: user.avatarUrl,
     ));
 
+    notifyListeners();
+
   }//put
 
-  notifyLysteners();
-
+  
 } // class
