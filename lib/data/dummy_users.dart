@@ -11,7 +11,7 @@ const DUMMY_USERS = {
     id: '2',
     name: 'Rafael',
     email: 'rafael@alunos.com.br',
-    avatarUrl: 'https://cdn.pixabay.com/photo/2016/04/01/11/25/avatar-1300331_960_720.png'
+    //avatarUrl: 'https://cdn.pixabay.com/photo/2016/04/01/11/25/avatar-1300331_960_720.png'
   ),
   '3' : const User(
     id: '3',
@@ -23,7 +23,7 @@ const DUMMY_USERS = {
     id: '4',
     name: 'Guilherme',
     email: 'gui@abcmail.com',
-    //avatarUrl: 'https://cdn.pixabay.com/photo/2016/03/31/19/58/avatar-1295429_960_720.png'
+    avatarUrl: 'https://cdn.pixabay.com/photo/2016/03/31/19/58/avatar-1295429_960_720.png'
   )
 
 };
