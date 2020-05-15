@@ -1,65 +1,78 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_crud/data/dummy_users.dart';
 import 'package:flutter_crud/models/user.dart';
+import 'package:http/http.dart' as http;
 
 class Users with ChangeNotifier {
+  static const _baseUrl = 'https://flutter-firebase-crud01.firebaseio.com/';
 
   final Map<String, User> _items = {...DUMMY_USERS};
 
   List<User> get all {
     return [..._items.values];
-  }//all
+  } //all
 
   int get count {
     return _items.length;
-  }//count
+  } //count
 
-  User byIndex(i){
+  User byIndex(i) {
     return _items.values.elementAt(i);
-  }//byIndex
+  } //byIndex
 
-  void put(User user){
-    if(user == null){
+  Future<void> put(User user) async {
+    if (user == null) {
       return;
-    }//if
+    } //if
 
-    if( user.id != null &&
+    if (user.id != null &&
         user.id.trim().isNotEmpty &&
-        _items.containsKey(user.id)){
-      _items.update(user.id, (_) => User(
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        avatarUrl: user.avatarUrl,
+        _items.containsKey(user.id)) {
+      _items.update(
+          user.id,
+          (_) => User(
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                avatarUrl: user.avatarUrl,
+              ));
+    } //if
+    else {
+      //adicionar
+      final response = await http.post(
+        "$_baseUrl/users.json",
+        body: json.encode({
+          'name': user.name,
+          'email': user.email,
+          'avatarUrl': user.avatarUrl,
+        } //body 
+            ), //json
+      ); //post
 
-      ));
-    }//if
-    else{
+      final id = json.decode(response.body)['name'];
+      print (json.decode(response.body));
 
-    //adicionar
-       final id = Random().nextDouble().toString();
-    _items.putIfAbsent(id, () => User(
-      id: id,
-      name: user.name,
-      email: user.email,
-      avatarUrl: user.avatarUrl,
-    ));
-
-    }//else
+      _items.putIfAbsent(
+          id,
+          () => User(
+                id: id,
+                name: user.name,
+                email: user.email,
+                avatarUrl: user.avatarUrl,
+              ));
+    } //else
 
     notifyListeners();
+  } //put
 
-  }//put
-
-  void remove (User user){
-    if(user != null && user.id != null){
+  void remove(User user) {
+    if (user != null && user.id != null) {
       _items.remove(user.id);
       notifyListeners();
+    } //if
+  } //remove
 
-    }//if
-  }//remove
-
-  
 } // class
