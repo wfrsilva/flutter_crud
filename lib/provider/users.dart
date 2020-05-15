@@ -31,6 +31,17 @@ class Users with ChangeNotifier {
     if (user.id != null &&
         user.id.trim().isNotEmpty &&
         _items.containsKey(user.id)) {
+        
+        await http.patch(
+        "$_baseUrl/users/${user.id}.json",
+        body: json.encode({
+          'name': user.name,
+          'email': user.email,
+          'avatarUrl': user.avatarUrl,
+        } //body 
+            ), //json
+      ); //patch
+
       _items.update(
           user.id,
           (_) => User(
