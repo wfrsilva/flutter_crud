@@ -10,7 +10,7 @@ class UserForm extends StatefulWidget {
 
 class _UserFormState extends State<UserForm> {
   final _form = GlobalKey<FormState>();
-
+  bool _isLoading = false;
   final Map<String, String> _formData = {};
 
   void _loadFormData(User user) {
@@ -38,13 +38,17 @@ class _UserFormState extends State<UserForm> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.save),
-            onPressed: () {
+            onPressed: () async {
               final isValid = _form.currentState.validate();
 
               if (isValid) {
                 _form.currentState.save();
 
-                Provider.of<Users>(context, listen: false).put(
+                setState(() {
+                  _isLoading = true;
+                });
+
+                await Provider.of<Users>(context, listen: false).put(
                   User(
                     id: _formData['id'],
                     name: _formData['name'],
@@ -53,13 +57,19 @@ class _UserFormState extends State<UserForm> {
                   ),
                 );
 
+                setState(() {
+                  _isLoading = false;
+                });
+
                 Navigator.of(context).pop();
               }
             },
           ),
         ],
       ),
-      body: Padding(
+      body: _isLoading
+        ? Center(child: CircularProgressIndicator())
+        : Padding(
         padding: EdgeInsets.all(15),
         child: Form(
           key: _form,
