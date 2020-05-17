@@ -11,3 +11,12 @@
 
 # Github Cod3r
 https://github.com/cod3rcursos/youtube/tree/master/flutter_crud
+
+# Tentando o Read Json
+https://flutter.dev/docs/cookbook/networking/background-parsing
+
+https://flutter-io-deploy-one.firebaseapp.com/networking/
+
+https://flutter-firebase-crud01.firebaseio.com/users
+
+
