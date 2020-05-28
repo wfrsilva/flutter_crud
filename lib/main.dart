@@ -18,20 +18,18 @@ class MyApp extends StatelessWidget {
           create: (ctx) => Users(),
         )
       ],
-      
       child: MaterialApp(
-      title: 'Flutter CRUD - Lista de Usuarios',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter CRUD - Lista de Usuarios',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        routes: {
+          AppRoutes.HOME: (_) => UserList(),
+          AppRoutes.USER_FORM: (_) => UserForm()
+        },
       ),
-      routes: {
-        AppRoutes.HOME: (_) => UserList(),
-        AppRoutes.USER_FORM: (_) => UserForm()
-      },
-      ),
-   ); 
-    
+    );
   }
 }
-
