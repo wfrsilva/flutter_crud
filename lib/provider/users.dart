@@ -12,10 +12,12 @@ class Users with ChangeNotifier {
   final Map<String, User> _items = {...DUMMY_USERS};
 
   List<User> get all {
+    print('users.dat > get all ');
     return [..._items.values];
   } //all
 
   int get count {
+    print('users.dat > get count ');
     return _items.length;
   } //count
 
@@ -64,6 +66,9 @@ class Users with ChangeNotifier {
       ); //post
 
       final id = json.decode(response.body)['name'];
+      print('id: ${id}');
+      //final mail = json.decode(response.body)['name']['email'];
+      //print('id: ${mail.toString()}');
       print (json.decode(response.body));
 
       _items.putIfAbsent(
