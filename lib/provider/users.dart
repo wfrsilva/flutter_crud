@@ -11,6 +11,12 @@ class Users with ChangeNotifier {
 
   final Map<String, User> _items = {...DUMMY_USERS};
 
+  List<User> get allFirebase {
+    print('users.dat > allFirebase ');
+
+    return [..._items.values];
+  } //all
+  
   List<User> get all {
     print('users.dat > get all ');
     return [..._items.values];
